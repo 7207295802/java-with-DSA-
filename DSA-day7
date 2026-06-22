@@ -1,0 +1,20 @@
+#perfect number
+  public class Main
+{
+	public static boolean is_perfect(int value){
+	    for(int num=1;num<=value;num++){
+	        if((num*num)==value){
+	            return true;
+	        }else if((num*num)>value){
+	            break;
+	        }
+	    }
+	    return false;
+	}
+	public static void main(String[] args){
+	    int num=-16;
+	    System.out.println(is_perfect(num));
+	}
+	    
+	
+}
