@@ -15,6 +15,17 @@
 	    int num=-16;
 	    System.out.println(is_perfect(num));
 	}
-	    
-	
+}
+
+#search in rotated sorted array
+class Solution {
+    public int search(int[] nums, int target) {
+        for(int ind=0;ind<nums.length;ind++){
+            if(nums[ind]==target){
+                return ind;
+            }
+        }
+        return -1;
+        
+    }
 }
