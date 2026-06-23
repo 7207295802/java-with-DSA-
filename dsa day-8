@@ -36,3 +36,55 @@ class Solution {
         return false;
     }
 }
+
+#Allocate minimum pages
+class Solution { 
+    // Helper function to check if allocation is possible with a max page limit (boundary)
+    private boolean can_write(int[] arr, int students, int boundary) { 
+        int student = 1;
+        int written = 0; 
+        
+        for (int page_count : arr) { 
+            // If a single book has more pages than the boundary, it's impossible
+            if (page_count > boundary) {
+                return false;
+            }
+            if ((written + page_count) > boundary) { 
+                student++; 
+                written = 0; 
+            } 
+            written += page_count; 
+        } 
+        return student <= students; 
+    } 
+
+    public int findPages(int[] arr, int k) { 
+        // Corner case: if students are more than the number of books
+        if (arr.length < k) { 
+            return -1; 
+        } 
+        
+        int low = arr[0], high = 0; 
+        for (int page_count : arr) { 
+            if (page_count > low) { 
+                low = page_count; 
+            } 
+            high += page_count; 
+        } 
+        
+        int possible = high; 
+        while (low <= high) { 
+            // Fixed the typo from (high=low) to (high-low)
+            int mid = low + (high - low) / 2; 
+            
+            if (can_write(arr, k, mid)) { 
+                possible = mid; 
+                high = mid - 1; // Try to find a smaller maximum
+            } else { 
+                low = mid + 1;  // Increase the minimum allowed pages
+            } 
+        } 
+        return possible; // Added missing return statement
+    } 
+}
+
